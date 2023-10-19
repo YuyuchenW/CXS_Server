@@ -1,0 +1,9 @@
+/cxs/build/CMakeFiles/rebuild_cache.dir
+/cxs/build/CMakeFiles/edit_cache.dir
+/cxs/build/CMakeFiles/test_util.dir
+/cxs/build/CMakeFiles/CXS.dir
+/cxs/build/CMakeFiles/test_schedule.dir
+/cxs/build/CMakeFiles/test.dir
+/cxs/build/CMakeFiles/testConfig.dir
+/cxs/build/CMakeFiles/test_fiber.dir
+/cxs/build/CMakeFiles/testThread.dir

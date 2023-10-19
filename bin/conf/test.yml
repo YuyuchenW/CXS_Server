@@ -1,0 +1,32 @@
+logs:
+  - name: root
+    level: info
+    formatter: "%d%T%m%n"
+    appenders:
+      - type: FileLogAppender
+        file: root.txt
+      - type: StdoutLogAppender
+  - name: system
+    level: info
+    formatter: "%d%T%m%n"
+    appenders:
+      - type: FileLogAppender
+        file: system.txt
+        formatter: "%d[%p]%T%m%n"
+      - type: StdoutLogAppender
+
+system:
+  port: 9990
+  value: 15
+  int_vector:
+    - 10
+    - 30
+  int_list: [20, 40, 50]
+  int_set: [2, 4, 5, 2, 23, 5, 2]
+  int_unordered_set: [3, 3, 4, 5, 6, 7, 3,4]
+  int_map:
+    cxs: 98
+    id: 1711122004
+  int_unordered_map: 
+    sxc: 89
+    id: 22014008

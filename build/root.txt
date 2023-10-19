@@ -1,0 +1,40 @@
+2023-05-11 22:10:31[FATAL]	hello root u
+2023-05-11 22:19:15[FATAL]	hello root u
+2023-05-11 22:19:38[FATAL]	hello root u
+2023-05-15 08:32:59[FATAL]	hello root u
+2023-05-15 08:34:26[FATAL]	hello root u
+2023-05-15 08:37:50[FATAL]	hello root u
+2023-05-15 08:39:35[FATAL]	hello root u
+2023-05-15 08:39:39[FATAL]	hello root u
+2023-05-15 08:39:41[FATAL]	hello root u
+2023-05-15 08:40:28[FATAL]	hello root u
+2023-05-18 14:41:48[FATAL]	hello root u
+2023-05-18 14:47:23[FATAL]	hello root u
+2023-05-18 14:47:23[INFO]	name = system.int_map description = system map typename = St3mapISsiSt4lessISsESaISt4pairIKSsiEEE value = cxs: 123
+2023-05-18 14:47:23[INFO]	name = system.int_unordered_map description = system unordered map typename = St13unordered_mapISsiSt4hashISsESt8equal_toISsESaISt4pairIKSsiEEE value = cxs: 213
+2023-05-18 14:47:23[INFO]	name = system.int_unordered_set description = system unordered_set typename = St13unordered_setIiSt4hashIiESt8equal_toIiESaIiEE value = - 2
+- 1
+2023-05-18 14:47:23[INFO]	name = system.int_set description = system set set typename = St3setIiSt4lessIiESaIiEE value = - 1
+- 2
+2023-05-18 14:47:23[INFO]	name = system.int_list description = system int list typename = St4listIiSaIiEE value = - 2
+- 2
+2023-05-18 14:47:23[INFO]	name = logs description = logs config typename = St3setIN3CXS9LogDefineESt4lessIS1_ESaIS1_EE value = - name: root
+  level: INFO
+  formatter: "%d%T%m%n"
+  appenders:
+    - type: FileLogAppender
+      file: root.txt
+      formatter: "%d[%p]%T%m%n"
+    - type: StdoutLogAppender
+      formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
+- name: system
+  level: DEBUG
+  formatter: "%d%T%m%n"
+  appenders:
+    - type: FileLogAppender
+      file: system.txt
+    - type: StdoutLogAppender
+2023-05-18 14:47:23[INFO]	name = system.port description = system port typename = i value = 8080
+2023-05-18 14:47:23[INFO]	name = system.int_vector description = system int vector typename = St6vectorIiSaIiEE value = - 2
+- 2
+2023-05-18 14:47:23[INFO]	name = system.value description = system value typename = f value = 3984.22998
