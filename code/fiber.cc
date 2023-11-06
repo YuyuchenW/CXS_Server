@@ -2,11 +2,15 @@
 #include "scheduler.hpp"
 namespace CXS
 {
+    // 全局协程id计数器
     static std::atomic<uint64_t> s_fiber_id(0);
+    // 当前活跃协程计数器
     static std::atomic<uint64_t> s_fiber_count(0);
+    // 使用system进行日志输出
     static CXS::Logger::ptr g_logger = CXS_LOG_NAME("system");
-
+    // 线程本地存储的当前协程指针
     static thread_local Fiber *t_fiber = nullptr;
+    //
     static thread_local Fiber::ptr t_threadFiber = nullptr;
 
     static ConfigVar<uint32_t>::ptr g_fiber_stack_size =
@@ -26,6 +30,11 @@ namespace CXS
 
     using StackAllocator = MallocStackAllocator;
 
+    // 协程构造函数
+    // 初始化协程状态为 EXEC（执行中）
+    // 设置当前线程的当前协程为 this
+    // 使用 getcontext 初始化 m_ctx
+    // 增加活跃协程计数
     Fiber::Fiber()
     {
         m_state = EXEC;
@@ -38,6 +47,13 @@ namespace CXS
 
         CXS_LOG_DEBUG(g_logger) << "Fiber::Fiber";
     }
+
+    // 协程构造函数，接受回调函数和栈大小等参数
+    // 初始化协程 ID、回调函数等成员变量
+    // 增加活跃协程计数
+    // 分配协程栈内存，设置栈大小
+    // 使用 getcontext 初始化 m_ctx
+    // 配置 m_ctx 的栈和执行函数
     Fiber::Fiber(std::function<void()> cb, size_t stacksize, bool use_caller)
         : m_id(++s_fiber_id), m_cb(cb)
     {
@@ -242,17 +258,17 @@ namespace CXS
         {
             cur->m_state = EXECEP;
             CXS_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what()
-                                      << " fiber_id=" << cur->getId()
-                                      << std::endl
-                                      << CXS::BacktraceToString();
+                                    << " fiber_id=" << cur->getId()
+                                    << std::endl
+                                    << CXS::BacktraceToString();
         }
         catch (...)
         {
             cur->m_state = EXECEP;
             CXS_LOG_ERROR(g_logger) << "Fiber Except"
-                                      << " fiber_id=" << cur->getId()
-                                      << std::endl
-                                      << CXS::BacktraceToString();
+                                    << " fiber_id=" << cur->getId()
+                                    << std::endl
+                                    << CXS::BacktraceToString();
         }
 
         auto raw_ptr = cur.get();

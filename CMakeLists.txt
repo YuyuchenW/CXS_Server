@@ -13,6 +13,9 @@ SET(LIB_SRC
     code/thread.cc
     code/fiber.cc
     code/scheduler.cc
+    code/iomanager.cc
+    code/timer.cpp
+
 )
 
 
@@ -48,6 +51,10 @@ target_link_libraries(test_fiber CXS ${LIB_LIB})
 add_executable(test_schedule test/test_schedule.cpp)
 add_dependencies(test_schedule CXS)
 target_link_libraries(test_schedule CXS ${LIB_LIB})
+
+add_executable(test_iomanager test/test_iomanager.cc)
+add_dependencies(test_iomanager CXS)
+target_link_libraries(test_iomanager CXS ${LIB_LIB})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)

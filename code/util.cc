@@ -2,6 +2,7 @@
 #include "log.h"
 #include "fiber.hpp"
 #include <execinfo.h>
+#include <sys/time.h>
 namespace CXS
 {
     CXS::Logger::ptr g_logger = CXS_LOG_NAME("system");
@@ -46,5 +47,18 @@ namespace CXS
             ss << prefix << bt[i] << std::endl;
         }
         return ss.str();
+    }
+
+    uint64_t GetCurrentMS()
+    {
+        struct timeval tv;
+        gettimeofday(&tv,nullptr);
+        return tv.tv_sec*1000 + tv.tv_usec/1000;
+    }
+    uint64_t GetCurrentUS()
+    {
+        struct timeval tv;
+        gettimeofday(&tv,nullptr);
+        return tv.tv_sec*1000*1000ul + tv.tv_usec;
     }
 }

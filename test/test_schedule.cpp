@@ -23,14 +23,10 @@ void test_fiber()
 int main(int argc, char const *argv[])
 {
     CXS_LOG_INFO(g_logger) << "main";
-
     CXS::Scheduler sc(3, false, "test");
-
     sc.start();
     sc.schedule(&test_fiber);
-
     sc.stop();
     CXS_LOG_INFO(g_logger) << "over";
-
     return 0;
 }

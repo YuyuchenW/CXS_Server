@@ -18,6 +18,18 @@ CMakeFiles/CXS.dir/code/fiber.cc.o: ../code/singleton.h
 CMakeFiles/CXS.dir/code/fiber.cc.o: ../code/thread.h
 CMakeFiles/CXS.dir/code/fiber.cc.o: ../code/util.h
 
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/config.hpp
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/fiber.hpp
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/iomanager.cc
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/iomanager.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/log.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/macro.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/scheduler.hpp
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/singleton.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/thread.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/timer.h
+CMakeFiles/CXS.dir/code/iomanager.cc.o: ../code/util.h
+
 CMakeFiles/CXS.dir/code/log.cc.o: ../code/config.hpp
 CMakeFiles/CXS.dir/code/log.cc.o: ../code/log.cc
 CMakeFiles/CXS.dir/code/log.cc.o: ../code/log.h
@@ -40,6 +52,11 @@ CMakeFiles/CXS.dir/code/thread.cc.o: ../code/singleton.h
 CMakeFiles/CXS.dir/code/thread.cc.o: ../code/thread.cc
 CMakeFiles/CXS.dir/code/thread.cc.o: ../code/thread.h
 CMakeFiles/CXS.dir/code/thread.cc.o: ../code/util.h
+
+CMakeFiles/CXS.dir/code/timer.cpp.o: ../code/thread.h
+CMakeFiles/CXS.dir/code/timer.cpp.o: ../code/timer.cpp
+CMakeFiles/CXS.dir/code/timer.cpp.o: ../code/timer.h
+CMakeFiles/CXS.dir/code/timer.cpp.o: ../code/util.h
 
 CMakeFiles/CXS.dir/code/util.cc.o: ../code/config.hpp
 CMakeFiles/CXS.dir/code/util.cc.o: ../code/fiber.hpp

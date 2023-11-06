@@ -25,11 +25,11 @@ namespace CXS
             m_rootFiber.reset(new Fiber(std::bind(&Scheduler::run, this), 0, true));
 
             CXS::Thread::SetName(m_name);
-            //将当前协程指针设置为主协程对象
+            // 将当前协程指针设置为主协程对象
             t_fiber = m_rootFiber.get();
-            //获取当前线程的id，用于标识主线程
+            // 获取当前线程的id，用于标识主线程
             m_rootThread = CXS::GetThreadId();
-            
+
             m_threadIds.push_back(m_rootThread);
         }
         else
@@ -84,7 +84,7 @@ namespace CXS
     {
         m_autoStop = true;
         if (m_rootFiber && m_threadCount == 0 &&
-            ((m_rootFiber->getState() == Fiber::TERM) || m_rootFiber->getState() == Fiber::INIT))
+            (m_rootFiber->getState() == Fiber::TERM || m_rootFiber->getState() == Fiber::INIT))
         {
             CXS_LOG_INFO(g_logger) << this << "stopped";
             m_stopping = true;
@@ -110,19 +110,6 @@ namespace CXS
         }
         if (m_rootFiber)
         {
-            tickle();
-            // while (!stopping())
-            // {
-            //     // if (m_rootFiber->getState() == Fiber::TERM || m_rootFiber->getState() == Fiber::EXECEP)
-            //     // {
-            //     //     m_rootFiber.reset(new Fiber(std::bind(&Scheduler::run, this), 0, true));
-            //     //     CXS_LOG_INFO(g_logger) << "root fiber is term , reset";
-            //     //     t_fiber =m_rootFiber.get();
-            //     // }
-
-            //     m_rootFiber->call();
-
-            // }
             if (!stopping())
             {
                 m_rootFiber->call();
@@ -148,27 +135,37 @@ namespace CXS
     void Scheduler::run()
     {
         CXS_LOG_DEBUG(g_logger) << m_name << " run";
-        // set_hook_enable(true);
+        // 将调度器指针设为当前调度器对象
         setThis();
+
+        // 如果当前线程不是主线程。将当前协程设置为主协程
         if (CXS::GetThreadId() != m_rootThread)
         {
             t_fiber = Fiber::GetThis().get();
         }
-
+        // 创建一个空闲协程用于处理空闲状态
         Fiber::ptr idle_fiber(new Fiber(std::bind(&Scheduler::idle, this)));
+
+        // 创建一个协程对象，用于存放需要执行的协程
         Fiber::ptr cb_fiber;
 
+        // 声明一个结构体 FiberAndThread，用于存放协程和线程信息
         FiberAndThread ft;
         while (true)
         {
+            // 情况结构体
             ft.reset();
+            // 用于标记是否需要唤醒其他线程
             bool tickle_me = false;
+            // 用于标记当前是否有协程在执行
             bool is_active = false;
             {
+
                 MutexType::Lock lock(m_mutex);
                 auto it = m_fibers.begin();
                 while (it != m_fibers.end())
                 {
+                    // 如果协程的线程信息不匹配当前线程，则将该协程留在队列中并继续查找
                     if (it->thread != -1 && it->thread != CXS::GetThreadId())
                     {
                         ++it;
@@ -177,12 +174,13 @@ namespace CXS
                     }
 
                     CXS_ASSERT(it->fiber || it->cb);
+                    // 如果协程有效且处于执行状态，则继续查找
                     if (it->fiber && it->fiber->getState() == Fiber::EXEC)
                     {
                         ++it;
                         continue;
                     }
-
+                    // 获取一个有效的协程或回调
                     ft = *it;
                     m_fibers.erase(it++);
                     ++m_activeThreadCount;
@@ -191,7 +189,7 @@ namespace CXS
                 }
                 tickle_me |= it != m_fibers.end();
             }
-
+            // 如果需要唤醒其他线程，就执行唤醒操作
             if (tickle_me)
             {
                 tickle();
@@ -199,15 +197,18 @@ namespace CXS
 
             if (ft.fiber && (ft.fiber->getState() != Fiber::TERM && ft.fiber->getState() != Fiber::EXECEP))
             {
+                // 切换到要执行的协程
                 ft.fiber->swapIn();
                 --m_activeThreadCount;
 
                 if (ft.fiber->getState() == Fiber::READY)
                 {
+                    // 如果协程处于就绪状态，重新调度该协程
                     schedule(ft.fiber);
                 }
                 else if (ft.fiber->getState() != Fiber::TERM && ft.fiber->getState() != Fiber::EXECEP)
                 {
+                    // 如果协程不处于终止或异常状态，将其状态设置为 HOLD
                     ft.fiber->setState(Fiber::HOLD);
                 }
                 ft.reset();
@@ -216,26 +217,32 @@ namespace CXS
             {
                 if (cb_fiber)
                 {
+                    // 如果有回调协程正在运行，重置其回调函数
                     cb_fiber->reset(ft.cb);
                 }
                 else
                 {
+                    // 否则创建一个回调协程并设置回调函数
                     cb_fiber.reset(new Fiber(ft.cb));
                 }
                 ft.reset();
+                // 切换到回调协程执行
                 cb_fiber->swapIn();
                 --m_activeThreadCount;
                 if (cb_fiber->getState() == Fiber::READY)
                 {
+                    // 如果回调协程处于就绪，重新调度它
                     schedule(cb_fiber);
                     cb_fiber.reset();
                 }
                 else if (cb_fiber->getState() == Fiber::EXECEP || cb_fiber->getState() == Fiber::TERM)
                 {
+                    // 如果回调协程处于异常或终止状态，重置回调函数
                     cb_fiber->reset(nullptr);
                 }
                 else
                 { // if(cb_fiber->getState() != Fiber::TERM) {
+                    // 如果回调协程不处于终止状态，将其状态设置为 HOLD
                     cb_fiber->setState(Fiber::HOLD);
                     cb_fiber.reset();
                 }
@@ -249,6 +256,7 @@ namespace CXS
                 }
                 if (idle_fiber->getState() == Fiber::TERM)
                 {
+                    // 如果空闲协程处于终止状态，跳出循环
                     CXS_LOG_INFO(g_logger) << "idle fiber term";
                     break;
                 }
@@ -258,6 +266,7 @@ namespace CXS
                 --m_idleThreadCount;
                 if (idle_fiber->getState() != Fiber::TERM && idle_fiber->getState() != Fiber::EXECEP)
                 {
+                    // 如果空闲协程不处于终止或异常状态，将其状态设置为 HOLD
                     idle_fiber->setState(Fiber::HOLD);
                 }
             }

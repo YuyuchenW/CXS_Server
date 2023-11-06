@@ -1,5 +1,6 @@
 /cxs/build/CMakeFiles/rebuild_cache.dir
 /cxs/build/CMakeFiles/edit_cache.dir
+/cxs/build/CMakeFiles/test_iomanager.dir
 /cxs/build/CMakeFiles/test_util.dir
 /cxs/build/CMakeFiles/CXS.dir
 /cxs/build/CMakeFiles/test_schedule.dir

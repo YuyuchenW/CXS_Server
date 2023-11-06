@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_iomanager
+
+# Build rule for target.
+test_iomanager: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_iomanager
+.PHONY : test_iomanager
+
+# fast build rule for target.
+test_iomanager/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/build
+.PHONY : test_iomanager/fast
+
+#=============================================================================
 # Target rules for targets named test_util
 
 # Build rule for target.
@@ -261,6 +274,33 @@ code/fiber.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/fiber.cc.s
 .PHONY : code/fiber.cc.s
 
+code/iomanager.o: code/iomanager.cc.o
+
+.PHONY : code/iomanager.o
+
+# target to build an object file
+code/iomanager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/iomanager.cc.o
+.PHONY : code/iomanager.cc.o
+
+code/iomanager.i: code/iomanager.cc.i
+
+.PHONY : code/iomanager.i
+
+# target to preprocess a source file
+code/iomanager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/iomanager.cc.i
+.PHONY : code/iomanager.cc.i
+
+code/iomanager.s: code/iomanager.cc.s
+
+.PHONY : code/iomanager.s
+
+# target to generate assembly for a file
+code/iomanager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/iomanager.cc.s
+.PHONY : code/iomanager.cc.s
+
 code/log.o: code/log.cc.o
 
 .PHONY : code/log.o
@@ -341,6 +381,33 @@ code/thread.s: code/thread.cc.s
 code/thread.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/thread.cc.s
 .PHONY : code/thread.cc.s
+
+code/timer.o: code/timer.cpp.o
+
+.PHONY : code/timer.o
+
+# target to build an object file
+code/timer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/timer.cpp.o
+.PHONY : code/timer.cpp.o
+
+code/timer.i: code/timer.cpp.i
+
+.PHONY : code/timer.i
+
+# target to preprocess a source file
+code/timer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/timer.cpp.i
+.PHONY : code/timer.cpp.i
+
+code/timer.s: code/timer.cpp.s
+
+.PHONY : code/timer.s
+
+# target to generate assembly for a file
+code/timer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CXS.dir/build.make CMakeFiles/CXS.dir/code/timer.cpp.s
+.PHONY : code/timer.cpp.s
 
 code/util.o: code/util.cc.o
 
@@ -450,6 +517,33 @@ test/test_fiber.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/test/test_fiber.cc.s
 .PHONY : test/test_fiber.cc.s
 
+test/test_iomanager.o: test/test_iomanager.cc.o
+
+.PHONY : test/test_iomanager.o
+
+# target to build an object file
+test/test_iomanager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cc.o
+.PHONY : test/test_iomanager.cc.o
+
+test/test_iomanager.i: test/test_iomanager.cc.i
+
+.PHONY : test/test_iomanager.i
+
+# target to preprocess a source file
+test/test_iomanager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cc.i
+.PHONY : test/test_iomanager.cc.i
+
+test/test_iomanager.s: test/test_iomanager.cc.s
+
+.PHONY : test/test_iomanager.s
+
+# target to generate assembly for a file
+test/test_iomanager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cc.s
+.PHONY : test/test_iomanager.cc.s
+
 test/test_schedule.o: test/test_schedule.cpp.o
 
 .PHONY : test/test_schedule.o
@@ -539,6 +633,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test_iomanager"
 	@echo "... test_util"
 	@echo "... CXS"
 	@echo "... test_schedule"
@@ -552,6 +647,9 @@ help:
 	@echo "... code/fiber.o"
 	@echo "... code/fiber.i"
 	@echo "... code/fiber.s"
+	@echo "... code/iomanager.o"
+	@echo "... code/iomanager.i"
+	@echo "... code/iomanager.s"
 	@echo "... code/log.o"
 	@echo "... code/log.i"
 	@echo "... code/log.s"
@@ -561,6 +659,9 @@ help:
 	@echo "... code/thread.o"
 	@echo "... code/thread.i"
 	@echo "... code/thread.s"
+	@echo "... code/timer.o"
+	@echo "... code/timer.i"
+	@echo "... code/timer.s"
 	@echo "... code/util.o"
 	@echo "... code/util.i"
 	@echo "... code/util.s"
@@ -573,6 +674,9 @@ help:
 	@echo "... test/test_fiber.o"
 	@echo "... test/test_fiber.i"
 	@echo "... test/test_fiber.s"
+	@echo "... test/test_iomanager.o"
+	@echo "... test/test_iomanager.i"
+	@echo "... test/test_iomanager.s"
 	@echo "... test/test_schedule.o"
 	@echo "... test/test_schedule.i"
 	@echo "... test/test_schedule.s"
