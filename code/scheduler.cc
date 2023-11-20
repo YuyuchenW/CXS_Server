@@ -1,6 +1,7 @@
 #include "scheduler.hpp"
 #include "log.h"
 #include "macro.h"
+#include "hook.h"
 namespace CXS
 {
     static CXS::Logger::ptr g_logger = CXS_LOG_NAME("system");
@@ -136,8 +137,9 @@ namespace CXS
     {
         CXS_LOG_DEBUG(g_logger) << m_name << " run";
         // 将调度器指针设为当前调度器对象
-        setThis();
+        set_hook_enable(true);
 
+        setThis();
         // 如果当前线程不是主线程。将当前协程设置为主协程
         if (CXS::GetThreadId() != m_rootThread)
         {

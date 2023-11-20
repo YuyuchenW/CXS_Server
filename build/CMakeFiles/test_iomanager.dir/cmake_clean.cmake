@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "../bin/test_iomanager"
-  "../bin/test_iomanager.pdb"
+  "/home/ecs-user/CXS_Server/CXS_Server/bin/test_iomanager"
+  "/home/ecs-user/CXS_Server/CXS_Server/bin/test_iomanager.pdb"
   "CMakeFiles/test_iomanager.dir/test/test_iomanager.cc.o"
+  "CMakeFiles/test_iomanager.dir/test/test_iomanager.cc.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "../bin/test"
-  "../bin/test.pdb"
+  "/home/ecs-user/CXS_Server/CXS_Server/bin/test"
+  "/home/ecs-user/CXS_Server/CXS_Server/bin/test.pdb"
   "CMakeFiles/test.dir/test/test.cc.o"
+  "CMakeFiles/test.dir/test/test.cc.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

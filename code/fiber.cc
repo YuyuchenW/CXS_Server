@@ -85,7 +85,7 @@ namespace CXS
         --s_fiber_count;
         if (m_stack)
         {
-            CXS_ASSERT(m_state == TERM || m_state == INIT || m_state == INIT);
+            CXS_ASSERT(m_state == TERM || m_state == EXECEP  || m_state == INIT);
             StackAllocator::Dealloc(m_stack, m_stacksize);
         }
         else

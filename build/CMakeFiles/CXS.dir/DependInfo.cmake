@@ -1,31 +1,26 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/cxs/code/config.cc" "/cxs/build/CMakeFiles/CXS.dir/code/config.cc.o"
-  "/cxs/code/fiber.cc" "/cxs/build/CMakeFiles/CXS.dir/code/fiber.cc.o"
-  "/cxs/code/iomanager.cc" "/cxs/build/CMakeFiles/CXS.dir/code/iomanager.cc.o"
-  "/cxs/code/log.cc" "/cxs/build/CMakeFiles/CXS.dir/code/log.cc.o"
-  "/cxs/code/scheduler.cc" "/cxs/build/CMakeFiles/CXS.dir/code/scheduler.cc.o"
-  "/cxs/code/thread.cc" "/cxs/build/CMakeFiles/CXS.dir/code/thread.cc.o"
-  "/cxs/code/timer.cpp" "/cxs/build/CMakeFiles/CXS.dir/code/timer.cpp.o"
-  "/cxs/code/util.cc" "/cxs/build/CMakeFiles/CXS.dir/code/util.cc.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "CXS_EXPORTS"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ecs-user/CXS_Server/CXS_Server/code/config.cc" "CMakeFiles/CXS.dir/code/config.cc.o" "gcc" "CMakeFiles/CXS.dir/code/config.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/fiber.cc" "CMakeFiles/CXS.dir/code/fiber.cc.o" "gcc" "CMakeFiles/CXS.dir/code/fiber.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/hook.cc" "CMakeFiles/CXS.dir/code/hook.cc.o" "gcc" "CMakeFiles/CXS.dir/code/hook.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/iomanager.cc" "CMakeFiles/CXS.dir/code/iomanager.cc.o" "gcc" "CMakeFiles/CXS.dir/code/iomanager.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/log.cc" "CMakeFiles/CXS.dir/code/log.cc.o" "gcc" "CMakeFiles/CXS.dir/code/log.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/scheduler.cc" "CMakeFiles/CXS.dir/code/scheduler.cc.o" "gcc" "CMakeFiles/CXS.dir/code/scheduler.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/thread.cc" "CMakeFiles/CXS.dir/code/thread.cc.o" "gcc" "CMakeFiles/CXS.dir/code/thread.cc.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/timer.cpp" "CMakeFiles/CXS.dir/code/timer.cpp.o" "gcc" "CMakeFiles/CXS.dir/code/timer.cpp.o.d"
+  "/home/ecs-user/CXS_Server/CXS_Server/code/util.cc" "CMakeFiles/CXS.dir/code/util.cc.o" "gcc" "CMakeFiles/CXS.dir/code/util.cc.o.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.
