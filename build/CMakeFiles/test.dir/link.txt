@@ -1,1 +1,0 @@
-/usr/bin/c++  -rdynamic -O3  -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -rdynamic CMakeFiles/test.dir/test/test.cc.o -o /home/ecs-user/CXS_Server/CXS_Server/bin/test  -Wl,-rpath,/home/ecs-user/CXS_Server/CXS_Server/build libCXS.so -lpthread -lyaml-cpp -ldl 
