@@ -3,27 +3,22 @@
 #include "../code/log.h"
 #include "../code/config.hpp"
 #include "../code/scheduler.hpp"
-
+#include "../code/hook.h"
 CXS::Logger::ptr g_logger = CXS_LOG_ROOT();
+
+void test_fiber() {
     static int s_count = 5;
-
-void test_fiber()
-{
-
-    CXS_LOG_INFO(g_logger) << "test in fiber";
-    CXS_LOG_INFO(g_logger) << "s_count = " + std::to_string(s_count);
-
-
-    while (--s_count >= 0)
-    {
-        CXS::Scheduler::GetThis()->schedule(&test_fiber,CXS::GetThreadId());
+    CXS_LOG_INFO(g_logger) << "---test in fiber---" << s_count;
+    CXS::set_hook_enable(false);
+    sleep(1);
+    while (--s_count >= 0) {
+        CXS::Scheduler::GetThis()->schedule(&test_fiber, CXS::GetThreadId());
     }
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     CXS_LOG_INFO(g_logger) << "main";
-    CXS::Scheduler sc(3, false, "test");
+    CXS::Scheduler sc(2, false, "work");
     sc.start();
     sc.schedule(&test_fiber);
     sc.stop();

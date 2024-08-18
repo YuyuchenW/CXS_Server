@@ -28,7 +28,7 @@ void test_fiber()
     sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(84);
+    addr.sin_port = htons(22);
     inet_pton(AF_INET, "14.119.104.189", &addr.sin_addr.s_addr);
 
     if (!connect(sock, (const sockaddr *)&addr, sizeof(addr)))
@@ -71,12 +71,12 @@ void test1()
 {
     std::cout << "EPOLLIN=" << EPOLLIN
               << " EPOLLOUT=" << EPOLLOUT << std::endl;
-    CXS::IOManager iom(20);
+    CXS::IOManager iom(2);
     iom.schedule(&test_fiber);
 }
 
 int main(int argc, char **argv)
 {
-    test_timer();
+    test1();
     return 0;
 }

@@ -97,16 +97,25 @@ namespace CXS
 
     void *Thread::run(void *arg)
     {
-        Thread *thread = (Thread *)arg;
-        t_thread = thread;
-        t_thread_name = thread->m_name;
-        thread->m_id = CXS::GetThreadId();
-        pthread_setname_np(pthread_self(), thread->m_name.substr(0, 15).c_str());
+        // 拿到新创建的Thread对象
+    Thread* thread = (Thread*)arg;
+    // 更新当前线程
+    t_thread = thread;
+    t_thread_name = thread->m_name;
+    // 设置当前线程的id
+    // 只有进了run方法才是新线程在执行，创建时是由主线程完成的，threadId为主线程的
+    thread->m_id = CXS::GetThreadId();
+    // 设置线程名称
+    pthread_setname_np(pthread_self(), thread->m_name.substr(0, 15).c_str());
 
-        std::function<void()> cb;
-        cb.swap(thread->m_cb);
-        thread ->m_semaphore.notify();
-        cb();
-        return 0;
+    // pthread_creat时返回引用 防止函数有智能指针,
+    std::function<void()> cb;
+    cb.swap(thread->m_cb);
+
+    // 在出构造函数之前，确保线程先跑起来，保证能够初始化id
+    thread->m_semaphore.notify();
+
+    cb();
+    return 0;
     }
 } // namespace CXS

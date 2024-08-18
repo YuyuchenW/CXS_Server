@@ -44,15 +44,21 @@ public:
     }
 
 private:
+    //是否初始化
     bool m_isInit : 1;
+    //是否socket
     bool m_isSocket : 1;
+    //是否hook非阻塞
     bool m_sysNonbool : 1;
+    //是否关闭
     bool m_isClose : 1;
+    //用户是否设置非阻塞
     bool m_userNonblock : 1;
+    // 读写超时
     uint64_t m_recvTimeout;
     uint64_t m_sendTimeout;
+    // 文件句柄
     int m_fd;
-    CXS::IOManager *m_iomanager;
 };
 
 class FdManager {
@@ -65,9 +71,10 @@ public:
 
 private:
     RWMutexType m_mutex;
+    // 文件句柄集合
     std::vector<FdCtx::ptr> m_datas;
 };
 
-typedef Singleton<FdManager> Fdmgr;
+typedef Singleton<FdManager> FdMgr;
 }; // namespace CXS
 #endif

@@ -3,9 +3,15 @@
 #include <string.h>
 #include <assert.h>
 
+#if defined __GNUC__ || defined __llvm__
+#define CXS_LIKLY(x) __builtin_expect(!!(x), 1)
+#define CXS_UNLIKLY(x) __builtin_expect(!!(x), 0)
+#else
+#define CXS_LICKLY(x) (x)
+#define CXS_UNLICKLY(x) (x)
+#endif
 #define CXS_ASSERT(x)                                                            \
-    if (!(x))                                                                    \
-    {                                                                            \
+    if (CXS_UNLIKLY(!(x))) {                                                     \
         CXS_LOG_ERROR(CXS_LOG_ROOT()) << "ASSERTION : " #x                       \
                                       << "\n backtrace: \n"                      \
                                       << CXS::BacktraceToString(100, 2, "    "); \
@@ -13,8 +19,7 @@
     }
 
 #define CXS_ASSERT2(x, w)                                                        \
-    if (!(x))                                                                    \
-    {                                                                            \
+    if (CXS_UNLIKLY(!(x))) {                                                     \
         CXS_LOG_ERROR(CXS_LOG_ROOT()) << "ASSERTION : " #x                       \
                                       << "\n"                                    \
                                       << w                                       \
@@ -22,7 +27,5 @@
                                       << CXS::BacktraceToString(100, 2, "    "); \
         assert(x);                                                               \
     }
-
-
 
 #endif
